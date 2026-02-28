@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Housing Trends</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* ================= NAVBAR ================= */
+    header {
+      position: fixed;
+      width: 100%;
+      padding: 20px 0;
+      transition: 0.3s;
+      z-index: 999;
+    }
+
+    header.scrolled {
+      background: #1c232b;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 26px;
+      color: white;
+    }
+
+    .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin-left: 25px;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #ff4a17 !important;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url("{{ url_for('static', filename='img/background_img.jpg') }}") center center no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 55px;
+      font-weight: 700;
+      animation: fadeSlide 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-custom {
+      background: #ff4a17;
+      padding: 12px 35px;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-custom:hover {
+      background: #e63e0f;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    /* ================= SECTIONS ================= */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    /* About Image */
+    .about-img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: 0.4s;
+    }
+
+    .about-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1s;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .light-bg {
+      background: #f7f7f7;
+    }
+
+    footer {
+      background: #1c232b;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="navbar-brand">Housing Trends</div>
+    <div>
+      <a class="nav-link d-inline" href="#home">HOME</a>
+      <a class="nav-link d-inline" href="#about">ABOUT</a>
+      <a class="nav-link d-inline" href="#dashboard">DASHBOARD</a>
+      <a class="nav-link d-inline" href="#story">STORY</a>
+      <a class="nav-link d-inline" href="#prediction">PREDICT</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+  <div>
+    <h1>VISUALIZING HOUSING SALES TRENDS AND ITS PRICES.</h1>
+    <br><br>
+    <a href="#about" class="btn-custom">GET STARTED</a>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="container fade-in">
+    <div class="row align-items-center">
+
+      <div class="col-lg-6">
+        <img src="{{ url_for('static', filename='img/front_img.jpg') }}" class="about-img" alt="">
+      </div>
+
+      <div class="col-lg-6">
+        <h2>Analysis of Sale Prices and Features using Tableau</h2>
+        <br>
+        <p>✔ Understand key factors influencing house prices and trends.</p>
+        <p>✔ Analyze bedrooms, bathrooms, house age, renovations, and total sales.</p>
+        <p>✔ Visualize insights using Tableau for smarter decisions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section id="dashboard" class="light-bg">
+  <div class="container fade-in">
+    <div class="section-title">
+      <h2>Dashboard</h2>
+      <p>House Price Analysis</p>
+    </div>
+
+    <div class='tableauPlaceholder' id='viz1772265422551'></div>
+
+    <script>
+      var divElement = document.getElementById('viz1772265422551');
+      var vizElement = document.createElement('object');
+      vizElement.className = 'tableauViz';
+      vizElement.style.width = '100%';
+      vizElement.style.height = '850px';
+      vizElement.innerHTML = `
+        <param name='host_url' value='https://public.tableau.com/' />
+        <param name='embed_code_version' value='3' />
+        <param name='name' value='HousePricePrediction_17722652017940/Dashboard1' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+      `;
+      divElement.appendChild(vizElement);
+      var scriptElement = document.createElement('script');
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section id="story">
+  <div class="container fade-in">
+    <div class="section-title">
+      <h2>Story</h2>
+      <p>Data-Driven Housing Market Story</p>
+    </div>
+
+    <div class='tableauPlaceholder' id='viz1772265673055'></div>
+
+    <script>
+      var divElement2 = document.getElementById('viz1772265673055');
+      var vizElement2 = document.createElement('object');
+      vizElement2.className = 'tableauViz';
+      vizElement2.style.width = '100%';
+      vizElement2.style.height = '900px';
+      vizElement2.innerHTML = `
+        <param name='host_url' value='https://public.tableau.com/' />
+        <param name='embed_code_version' value='3' />
+        <param name='name' value='StoryTelling_17722655771570/Story1' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='yes' />
+      `;
+      divElement2.appendChild(vizElement2);
+      var scriptElement2 = document.createElement('script');
+      scriptElement2.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
+    </script>
+
+  </div>
+</section>
+<section id="prediction" class="light-bg">
+  <div class="container fade-in">
+    <div class="section-title">
+      <h2>Predict House Price</h2>
+      <p>Enter details to estimate price</p>
+    </div>
+
+    <form action="/predict" method="POST" class="row g-3">
+
+      <div class="col-md-4">
+        <input type="number" name="bedrooms" class="form-control" placeholder="Bedrooms" required>
+      </div>
+
+      <div class="col-md-4">
+        <input type="number" name="bathrooms" class="form-control" placeholder="Bathrooms" required>
+      </div>
+
+      <div class="col-md-4">
+        <input type="number" name="sqft" class="form-control" placeholder="Square Feet" required>
+      </div>
+
+      <div class="col-12 text-center">
+        <button type="submit" class="btn-custom">Predict Price</button>
+      </div>
+
+    </form>
+
+    {% if prediction %}
+      <div class="text-center mt-4">
+        <h3>Estimated Price: ₹ {{ prediction }}</h3>
+      </div>
+    {% else %}
+      <div class="text-center mt-4">
+        <h3>Estimated Price: ₹ 0</h3>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<footer>
+  © 2026 Housing Trends | Built with Tableau
+</footer>
+
+<script>
+  window.addEventListener("scroll", function() {
+    const navbar = document.getElementById("navbar");
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
+  });
+
+  const faders = document.querySelectorAll(".fade-in");
+
+  window.addEventListener("scroll", () => {
+    faders.forEach(fade => {
+      const top = fade.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        fade.classList.add("visible");
+      }
+    });
+  });
+</script>
+
+{% if scroll_to %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("{{ scroll_to }}").scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+</script>
+{% endif %}
+
+</body>
+</html>
