@@ -47,13 +47,24 @@ Template Engine	Jinja2
 📁 Project Structure
 House_Prediction/
 │
-├── app.py
-├── templates/
+├── Source_code/
+│   ├── app.py
 │   └── index.html
-├── static/
-│   └── img/
-│       ├── background_img.jpg
-│       └── front_img.jpg
+│
+├── Demo Video/
+│   └── Demo video.mp4
+│
+├── Document/
+│   └── revise_document_house.docx
+│
+├── Project Files/
+│   ├── dashboard.twb
+│   ├── sheet1.twb
+│   ├── sheet2.twb
+│   ├── sheet3.twb
+│   ├── sheet4.twb
+│   └── story.twb
+│
 └── README.md
 ⚙️ How To Run This Project Locally
 
